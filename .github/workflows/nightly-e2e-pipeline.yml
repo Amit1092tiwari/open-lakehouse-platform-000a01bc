@@ -1,0 +1,94 @@
+name: "🌙 Nightly E2E Live Integration & Resilience Testing"
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # Runs daily at 02:00 UTC (07:30 IST)
+  workflow_dispatch:     # Enables manual on-demand execution from Actions tab
+
+env:
+  PYTHON_VERSION: "3.10"
+  COMPOSE_PROJECT_NAME: "open-lakehouse-ci"
+
+jobs:
+  nightly-e2e:
+    name: "🚀 Live Multi-Service Integration & Scenario Validation"
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install Dependencies & Security Audit Tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt || true
+          pip install pymysql boto3 redis kafka-python requests pandas pip-audit
+
+      - name: 🛡️ Daily Dependency Vulnerability Audit
+        run: |
+          echo "Scanning Python dependencies for known CVEs..."
+          pip-audit --desc || true
+
+      - name: Setup Environment File
+        run: |
+          cp .env.example .env
+
+      - name: Start Multi-Container CI Infrastructure
+        run: |
+          docker compose -f docker-compose.ci.yaml up -d
+          echo "Infrastructure containers starting. Polling readiness probes..."
+
+      - name: Wait for Service Health Probes
+        run: |
+          for i in {1..30}; do
+            POSTGRES_READY=0
+            MYSQL_READY=0
+            MINIO_READY=0
+            REDIS_READY=0
+
+            docker compose -f docker-compose.ci.yaml exec -T postgres pg_isready -U test_user -d processed_db 2>/dev/null && POSTGRES_READY=1 || true
+            docker compose -f docker-compose.ci.yaml exec -T mysql mysqladmin ping -h localhost -u root -ptest_root 2>/dev/null && MYSQL_READY=1 || true
+            docker compose -f docker-compose.ci.yaml exec -T redis redis-cli ping 2>/dev/null | grep -q PONG && REDIS_READY=1 || true
+            curl -sf http://localhost:9000/minio/health/live 2>/dev/null && MINIO_READY=1 || true
+
+            if [ "$POSTGRES_READY" -eq 1 ] && [ "$MYSQL_READY" -eq 1 ] && [ "$REDIS_READY" -eq 1 ] && [ "$MINIO_READY" -eq 1 ]; then
+              echo "All core services (Postgres, MySQL, Redis, MinIO) are healthy!"
+              break
+            fi
+            echo "Waiting for live services (Attempt $i/30)..."
+            sleep 2
+          done
+
+      - name: Execute End-to-End Live Pipeline Runner
+        run: |
+          python scripts/run_e2e_pipeline.py
+
+      - name: Execute 35 Daily Unique Test Scenarios
+        run: |
+          python scripts/run_daily_test_scenarios.py
+
+      - name: Publish Daily Validation Report to GitHub Step Summary
+        if: always()
+        run: |
+          if [ -f reports/daily_test_scenario_validation_report.md ]; then
+            cat reports/daily_test_scenario_validation_report.md >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Upload Daily Test Scenario & Findings Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nightly-e2e-scenario-report
+          path: reports/daily_test_scenario_validation_report.md
+          retention-days: 14
+
+      - name: Teardown Live CI Infrastructure
+        if: always()
+        run: |
+          docker compose -f docker-compose.ci.yaml down -v

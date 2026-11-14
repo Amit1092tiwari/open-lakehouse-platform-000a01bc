@@ -2,6 +2,7 @@
 
 [![Repository](https://img.shields.io/badge/GitHub-open--lakehouse--platform-181717?logo=github&logoColor=white)](https://github.com/Amit1092tiwari/open-lakehouse-platform)
 [![CI/CD](https://github.com/Amit1092tiwari/open-lakehouse-platform/actions/workflows/cicd-pipeline.yml/badge.svg)](https://github.com/Amit1092tiwari/open-lakehouse-platform/actions/workflows/cicd-pipeline.yml)
+[![Nightly E2E](https://github.com/Amit1092tiwari/open-lakehouse-platform/actions/workflows/nightly-e2e-pipeline.yml/badge.svg)](https://github.com/Amit1092tiwari/open-lakehouse-platform/actions/workflows/nightly-e2e-pipeline.yml)
 
 [![Python](https://img.shields.io/badge/Python-3.10%20--%203.14-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![.NET](https://img.shields.io/badge/.NET_8-512BD4?logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
