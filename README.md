@@ -1,8 +1,8 @@
-# Open Lakehouse Platform (`open-lakehouse-platform`)
+# Open Lakehouse Platform (`open-lakehouse-platform-000a01bc`)
 
-[![Repository](https://img.shields.io/badge/GitHub-open--lakehouse--platform-181717?logo=github&logoColor=white)](https://github.com/Amit1092tiwari/open-lakehouse-platform)
-[![CI/CD](https://github.com/Amit1092tiwari/open-lakehouse-platform/actions/workflows/cicd-pipeline.yml/badge.svg)](https://github.com/Amit1092tiwari/open-lakehouse-platform/actions/workflows/cicd-pipeline.yml)
-[![Nightly E2E](https://github.com/Amit1092tiwari/open-lakehouse-platform/actions/workflows/nightly-e2e-pipeline.yml/badge.svg)](https://github.com/Amit1092tiwari/open-lakehouse-platform/actions/workflows/nightly-e2e-pipeline.yml)
+[![Repository](https://img.shields.io/badge/GitHub-open--lakehouse--platform--000a01bc-181717?logo=github&logoColor=white)](https://github.com/Amit1092tiwari/open-lakehouse-platform-000a01bc)
+[![CI/CD](https://github.com/Amit1092tiwari/open-lakehouse-platform-000a01bc/actions/workflows/cicd-pipeline.yml/badge.svg)](https://github.com/Amit1092tiwari/open-lakehouse-platform-000a01bc/actions/workflows/cicd-pipeline.yml)
+[![Nightly E2E](https://github.com/Amit1092tiwari/open-lakehouse-platform-000a01bc/actions/workflows/nightly-e2e-pipeline.yml/badge.svg)](https://github.com/Amit1092tiwari/open-lakehouse-platform-000a01bc/actions/workflows/nightly-e2e-pipeline.yml)
 
 [![Python](https://img.shields.io/badge/Python-3.10%20--%203.14-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![.NET](https://img.shields.io/badge/.NET_8-512BD4?logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
@@ -773,8 +773,8 @@ flowchart TD
 
 ### 0. Clone the Repository
 ```bash
-git clone https://github.com/Amit1092tiwari/open-lakehouse-platform.git
-cd open-lakehouse-platform
+git clone https://github.com/Amit1092tiwari/open-lakehouse-platform-000a01bc.git
+cd open-lakehouse-platform-000a01bc
 ```
 
 ### 1. Initialize Configuration
