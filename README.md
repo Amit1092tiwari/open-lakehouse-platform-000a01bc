@@ -1,5 +1,7 @@
 # Open Lakehouse Platform (`open-lakehouse-platform-000a01bc`)
 
+[![Release](https://img.shields.io/badge/Release-v1.0.0-blue.svg)](https://github.com/Amit1092tiwari/open-lakehouse-platform-000a01bc/releases)
+[![Automated Tests](https://img.shields.io/badge/Tests-96%20Passing-brightgreen.svg)]()
 [![Repository](https://img.shields.io/badge/GitHub-open--lakehouse--platform--000a01bc-181717?logo=github&logoColor=white)](https://github.com/Amit1092tiwari/open-lakehouse-platform-000a01bc)
 [![CI/CD](https://github.com/Amit1092tiwari/open-lakehouse-platform-000a01bc/actions/workflows/cicd-pipeline.yml/badge.svg)](https://github.com/Amit1092tiwari/open-lakehouse-platform-000a01bc/actions/workflows/cicd-pipeline.yml)
 [![Nightly E2E](https://github.com/Amit1092tiwari/open-lakehouse-platform-000a01bc/actions/workflows/nightly-e2e-pipeline.yml/badge.svg)](https://github.com/Amit1092tiwari/open-lakehouse-platform-000a01bc/actions/workflows/nightly-e2e-pipeline.yml)

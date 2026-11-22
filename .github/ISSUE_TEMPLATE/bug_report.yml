@@ -1,0 +1,39 @@
+name: Bug Report
+description: Report a reproducible issue or pipeline failure
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: Thank you for helping improve Open Lakehouse Platform!
+  - type: input
+    id: environment
+    attributes:
+      label: Environment & Hardware
+      description: OS, Docker version, available RAM/CPUs
+      placeholder: Ubuntu 22.04, Docker 24.0.7, 16GB RAM, 8 Cores
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: Exact commands executed (e.g. `docker compose up -d`, airflow DAG run)
+      placeholder: |
+        1. Run `make up-lite`
+        2. Trigger DAG `batch_ingestion_pipeline`
+        3. Observe task log failure
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs. Actual Output
+      description: What was expected vs. what was logged
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Container / Pipeline Logs
+      description: Relevant output from `docker compose logs <service>` or Airflow task
+      render: shell

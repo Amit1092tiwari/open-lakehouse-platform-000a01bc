@@ -1,0 +1,26 @@
+name: Feature Proposal
+description: Propose an architecture enhancement, new connector, or storage engine
+labels: ["enhancement", "architecture"]
+body:
+  - type: markdown
+    attributes:
+      value: Proposals should align with the mission of maintaining vendor-neutral, 100% open-source data platforms.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement / Architectural Gap
+      description: What challenge or use case does this enhancement solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Solution / Component
+      description: Proposed engine, library, or pipeline integration (e.g. Apache Iceberg catalog, Trino query engine)
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Other approaches evaluated
